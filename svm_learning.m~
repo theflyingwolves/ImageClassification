@@ -1,0 +1,32 @@
+function  svm_learning()
+
+    disp('svm learning begins......')     
+    %%%%%%%%%% TO Do  %%%%%%%%%%%%%
+    % if you use SVM as classifier. please computing the normal vector "w". Please
+    % remove following code, and rewrite your code.
+    w = zeros(5,1);
+    b = zeros(5,1);
+    
+    codeVectorMatrix = zeros(500,300);
+    
+    for classID = 1 : 5
+        for imageID = 1 : 60
+            load(['training/code_vector/codeVector_',num2str(classID),'_',num2str(imageID),'.mat'],'code_vector');
+            codeVectorMatrix(:,((classID-1)*60+imageID)) = code_vector(:,1);
+        end
+    end
+    
+    labels = -ones(300,1);
+    
+    for classID = 1 : 5
+        for imageID = 1 : 60
+            labels(((classID-1)*60+imageID),1) = 1;
+        end
+        
+        
+    end
+
+    %%%%%%%%%% To Do  End %%%%%%%%%%
+    save('training\SVM\w.mat','w')
+    save('training\SVM\b.mat','b')
+end
