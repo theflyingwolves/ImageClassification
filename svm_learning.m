@@ -16,16 +16,16 @@ function  svm_learning()
         end
     end
     
-    labels = -ones(300,1);
-    
     lambda = 0.01;
     maxIter = 1000;
     
     for classID = 1 : 5
+        labels = -ones(300,1);
+        
         for imageID = 1 : 60
             labels(((classID-1)*60+imageID),1) = 1;
         end
-        
+                
         [currW currB info] = vl_svmtrain(codeVectorMatrix,labels,lambda,'MaxNumIterations',maxIter);
         
         w(:,classID) = currW;

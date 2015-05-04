@@ -41,8 +41,8 @@ function  classificationRes = testing()
     end
      
     % Choice 2: if you use SVM, you may need all normal vector w, please load it
-    %load('training/SVM/w','w')
-    w = 0;
+    load('training/SVM/w','w');
+    load('training/SVM/b','b');
   
     classificationRes = zeros(1,200);
     kk = 0;
@@ -50,7 +50,7 @@ function  classificationRes = testing()
         for imgID = 61 : 100
             kk = kk + 1;
             load(['testing/code_vector/codeVector_',num2str(classID),'_',num2str(imgID),'.mat'], 'codeVector');
-            classificationRes(kk) = img_classifiction(codeVector,codeVectorAll,classIDs,w);
+            classificationRes(kk) = img_classifiction(codeVector,codeVectorAll,classIDs,w,b);
         end
     end
 
