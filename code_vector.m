@@ -11,34 +11,50 @@ function  code_vector(inputFile, outputFile , classID, imgID)
     % Following example code just let you know the relationship between code vector and descriptors.
     % Please remove this example code and rewrite your code vector computing here. 
     
-    curCodeVector = zeros(size(CodeBook,2),1);
+    % ===================== Vector Quantizaation ======================
     
-    currFeatureVector = zeros(size(featureDescriptor,1),1);
-    currCodeBookEntry = zeros(size(CodeBook,1),1);
+    %curCodeVector = zeros(size(CodeBook,2),1);
     
+    %currFeatureVector = zeros(size(featureDescriptor,1),1);
+    %currCodeBookEntry = zeros(size(CodeBook,1),1);
+    
+    %for uu = 1 : length(featureDescriptor)
+    %    currFeatureVector = featureDescriptor{uu};
+    %    minSquaredDist = 0;
+    %    minSquaredDistIndex = 0;
+        
+    %    for vv = 1:size(CodeBook,2)
+    %        currCodeBookEntry = CodeBook(:,vv);
+    %        diffVec = double(currFeatureVector) - double(currCodeBookEntry);
+    %        squaredDist = diffVec' * diffVec;
+    %        if minSquaredDist == 0
+    %            minSquaredDist = squaredDist;
+    %            minSquaredDistIndex = vv;
+    %        elseif squaredDist < minSquaredDist
+    %            minSquaredDist = squaredDist;
+    %            minSquaredDistIndex = vv;
+    %        end
+    %    end
+        
+    %    curCodeVector(minSquaredDistIndex,1) = curCodeVector(minSquaredDistIndex,1) + 1;
+    %end
+    
+    %codeVector = curCodeVector / (length(featureDescriptor));
+    
+    
+    % ===================== Sparse Coding + Pooling ======================
     for uu = 1 : length(featureDescriptor)
-        currFeatureVector = featureDescriptor{uu};
-        minSquaredDist = 0;
-        minSquaredDistIndex = 0;
-        
-        for vv = 1:size(CodeBook,2)
-            currCodeBookEntry = CodeBook(:,vv);
-            diffVec = double(currFeatureVector) - double(currCodeBookEntry);
-            squaredDist = diffVec' * diffVec;
-            if minSquaredDist == 0
-                minSquaredDist = squaredDist;
-                minSquaredDistIndex = vv;
-            elseif squaredDist < minSquaredDist
-                minSquaredDist = squaredDist;
-                minSquaredDistIndex = vv;
-            end
-
-        end
-        
-        curCodeVector(minSquaredDistIndex,1) = curCodeVector(minSquaredDistIndex,1) + 1;
+        currFeatureVector = double(featureDescriptor{uu});
+        codeVectorAll{uu} = CodeBook' * currFeatureVector;
     end
     
-    codeVector = curCodeVector / (length(featureDescriptor));
+    %Mean Pooling
+    sum = zeros(size(codeVectorAll{1},1),size(codeVectorAll{1},2));
+    for vv = 1 : length(codeVectorAll)
+        sum = sum + (codeVectorAll{vv} .^ 2);
+    end
+    codeVector = sqrt(sum / length(codeVectorAll));
+    codeVector = codeVector / norm(codeVector);
     
     %curCodeVector = zeros(size(CodeBook,2),1);
     %for uu = 1 : length(featureDescriptor)

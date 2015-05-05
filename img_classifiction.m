@@ -21,13 +21,10 @@ function Res = img_classifiction(codeVector,codeVectorAll,classIDs,w,b)
     for classID = 1 : 5
         currW = w(:,classID);
         currB = b(classID,1);
-        result(classID,1) = currW' * codeVector;
+        result(classID,1) = currW' * codeVector + currB;
     end
-    disp('Result:');
-    disp(result);
     
-    disp('currB:');
-    disp(currB);
+    result
     
     max = 0;
     

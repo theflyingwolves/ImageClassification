@@ -12,13 +12,13 @@ function image_classification_training()
         end
     end
     
-    %descriptporMatrix = descriptpor_load();
-    %codebook_computation(descriptporMatrix);
+    descriptporMatrix = descriptpor_load();
+    codebook_computation(descriptporMatrix);
    
     disp('code vector computing begins......')
     for classID = 1 : 5
         for imgID = 1 : 60
-            %code_vector('training', 'training', classID, imgID);
+            code_vector('training', 'training', classID, imgID);
         end
     end
    

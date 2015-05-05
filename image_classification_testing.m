@@ -53,5 +53,4 @@ function  classificationRes = testing()
             classificationRes(kk) = img_classifiction(codeVector,codeVectorAll,classIDs,w,b);
         end
     end
-
 end

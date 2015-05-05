@@ -17,8 +17,21 @@ function feature_extraction(inputFile, outputFile, classID, imgID)
         Img = rgb2gray(Img); % this is standard color to gray. 
     end
     
-    extractNum = 10;
+    
     [f,d] = vl_sift(single(Img));
+    
+    %sumOfDescs = zeros(size(d,1),1);
+    
+    %for ii = 1 : size(d,2)
+    %    currDCol = d(:,ii);
+    %    sumOfDescs = sumOfDescs + double(currDCol.^2);
+    %end
+    
+    %pooledFeature = sqrt(sumOfDescs / size(d,2));
+    
+    %featureDescriptor{1} = pooledFeature;
+    
+    extractNum = 10;
     perm = randperm(size(f,2));
     sel = perm(1:extractNum);
     for kk = 1 : extractNum
