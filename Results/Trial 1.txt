@@ -1,4 +1,4 @@
-Settings: 
+cSettings: 
 
 feature descriptor: SIFT features as implemented in vl_sift
 dictionary computation: k-means

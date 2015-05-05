@@ -16,6 +16,9 @@ function  codebook_computation(descriptorMatrix)
     [IDX,C] = kmeans(descriptorMatrix',codeNum);
     CodeBook = C';
     
+    disp('Size of CodeBook: (Expected 128-by-500)');
+    size(CodeBook)
+    
     %codeNum = 500; % you can change it by yourself.
     %CodeBook = zeros(size(descriptporMatrix,1),codeNum);
     %index = randperm(size(descriptporMatrix,2));

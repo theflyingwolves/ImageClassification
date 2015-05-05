@@ -21,18 +21,24 @@ function Res = img_classifiction(codeVector,codeVectorAll,classIDs,w,b)
     for classID = 1 : 5
         currW = w(:,classID);
         currB = b(classID,1);
-        result(classID,1) = currW' * codeVector + currB;
+        result(classID,1) = currW' * codeVector;
     end
-    
+    disp('Result:');
     disp(result);
     
-    Res = -1;
+    disp('currB:');
+    disp(currB);
+    
+    max = 0;
     
     for classID = 1 : 5
-        if result(classID) > 0
-            Res = classID;
-            break;
-        end
+       if max == 0
+           max = result(classID);
+           Res = classID;
+       elseif result(classID) > max
+           max = result(classID);
+           Res = classID;
+       end
     end
     
    %%%%%%%%%% To Do  End %%%%%%%%%%

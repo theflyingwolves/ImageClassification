@@ -12,7 +12,7 @@ function  svm_learning()
     for classID = 1 : 5
         for imageID = 1 : 60
             load(['training/code_vector/codeVector_',num2str(classID),'_',num2str(imageID),'.mat'],'codeVector');
-            codeVectorMatrix(:,((classID-1)*60+imageID)) = codeVector(:,1);
+            codeVectorMatrix(:,((classID-1)*60+imageID)) = codeVector;
         end
     end
     
@@ -20,18 +20,21 @@ function  svm_learning()
     maxIter = 1000;
     
     for classID = 1 : 5
-        labels = -ones(300,1);
+        labels = -ones(1,300);
         
         for imageID = 1 : 60
-            labels(((classID-1)*60+imageID),1) = 1;
+            labels(1,((classID-1)*60+imageID)) = 1;
         end
                 
         [currW currB info] = vl_svmtrain(codeVectorMatrix,labels,lambda,'MaxNumIterations',maxIter);
         
-        w(:,classID) = currW;
+        disp('Size of currW: (Expected 500-by-1):');
+        size(currW)
+        
+        w(:,classID) = currW';
         b(classID,1) = currB;
     end
-
+    
     %%%%%%%%%% To Do  End %%%%%%%%%%
     save('training/SVM/w.mat','w')
     save('training/SVM/b.mat','b')

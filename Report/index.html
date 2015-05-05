@@ -1,0 +1,139 @@
+<html>
+<head>
+	<title>ENGG5104 Final Project Report</title>
+	<style type="text/css">
+	div {
+		margin-left: 50px;
+		margin-right: 50px;
+	}
+	table,tr,th,td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		text-align: center;
+	}
+
+	th,td {
+		width: 120px;
+	}
+	</style>
+</head>
+<body>
+<center>
+	<h2>ENGG5104 Final Project Report</h2>
+	<h3>Image Classification</h3>
+	<h4>Wang Kunzhen&nbsp&nbsp(1155065438)</h4>
+</center>
+
+<section>
+	<h3>1. Introduction</h3>
+	<div>
+		<p>The basic flow of an image classification process is to first train a classifier using existing known image dataset and then use the classifier against the given input to get the classification results. As we can see, we have the freedom to choose between different combinations of feature descriptors, dictionary computation methods, histogram representations as well as classifiers. In this report, a few of the choices are going to be implemented and presented, and analysis of the classification results will also be given for each trial. The code for each trial can be found at the corresponding version of the git repository <a href="https://github.com/theflyingwolves/ImageClassification"><b>HERE</b></a>. We will also select, according to the results and analysis, the best version for submission.</p>
+	</div>
+</section>
+
+<section>
+	<h3>2. Trial History</h3>
+	<div>
+		<ol>
+			<li>
+				<h5>Trial 1</h5>
+				<ul>
+					<li><b>Settings:</b>
+						<ul>
+							<li>Feature Descriptor: SIFT features as implemented in vl_sift</li>
+							<li>Dictionary Computation: k-means</li>
+							<li>Histogram Representation: Feature Quantization and Histogram Computation</li>
+							<li>Classifier: KNN as implemented in vl_kdtreebuild and vl_kdtreequery</li>
+						</ul>
+					</li>
+
+					<li><b>Libraries Used:</b> VLFEAT
+					</li>
+
+					<li><b>Results:</b>
+						<ul>
+							<li>
+								<b>Class 1: 25%</b> <br>
+								4     1     3     5     4     1     4     4     5     2     3     1     1     3     5     3 		 5     5     2     2     3     1     4     2     3     2     2     5     1     3     2     1     1     1     2     2     2     3     2     1
+							</li>
+
+							<li>
+								<b>Class 2: 20%</b> <br>
+								 3     1     1     5     4     2     4     5     5     2     1     3     4     5     1     3     3     1     3     2     5     1     5     1     1     2     3     2     2     3     5     4     1     5     5     2     2     1     5     3
+							</li>
+
+							<li>
+								<b>Class 3: 25%</b><br>
+								 1     5     3     4     3     5     1     2     3     3     5     1     1     5     1     1		 2     5     3     3     4     5     4     2     1     4     5     2     4     5     4     3     4     3     5     1     3     2     3     3
+							</li>
+
+							<li>
+								<b>Class 4: 15%</b><br>
+								 3     2     5     4     3     5     3     1		 3     2     5     3     3     1     4     3     1     5     1     1     3     3     4     5		 5     2     2     5     1     1     4     1     2     3     5     5     4     4     1     1
+							</li>
+
+							<li>
+								<b>Class 5: 5%</b><br>
+								 1     1     4     3     1     3     1     1     2     2     2     3     3     1     3     2		 1     5     3     2     1     4     1     1     2     4     4     4     5     4     1     1		 1     1     2     1     4     4     2     1
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+
+			<li>
+				<h5>Trial 2</h5>
+				<ul>
+					<li><b>Settings:</b>
+						<ul>
+							<li>Feature Descriptor: SIFT features as implemented in vl_sift
+							</li>
+							<li>Dictionary Computation: k-means</li>
+							<li>Histogram Representation: Feature Quantization and Histogram Computation</li>
+							<li>Classifier: One-to-All Linear SVM as implemented in svmtrain, libsvm.</li>
+						</ul>
+					</li>
+
+					<li>
+						<b>Libraries Used:</b> VLFEAT, libsvm
+					</li>
+
+					<li>
+						<b>Results:</b> <br>
+						<ul>
+							<li>
+								<b>Class 1: 20%</b> <br>
+								 2     4     1     5     1     5     3     5     2     2     4     3     2     5     1     2     1     4     2     3     1     1     3     2     1     3     3     4     4     2     3     4     5     2     3     4     5     4     2     1
+							</li>
+
+							<li>
+								<b>Class 2: 30%</b> <br>
+								5     2     2     4     2     3     3     4     5     5     4     5     5     3     5     4     1     1     2     2     3     2     1     2     1     2     3     1     1     2     2     3     4     5     2     4     5     4     2     5
+							</li>
+
+							<li>
+								<b>Class 3: 42.5%</b> <br>
+								 5     3     3     1     3     3     3     3     3     4     1     1     3     3     3     2     5     4     2     3     5     3     3     5     2     3     1     5     3     1     2     5     4     3     1     5     5     3     4     1
+							</li>
+
+							<li>
+								<b>Class 4: 32.5%</b> <br>
+								 4     1     5     1     2     2     1     2     5     4     4     5     1     2     4     2     5     5     4     4     3     3     4     4     4     4     4     2     4     4     3     1     3     1     5     3     5     1     3     5
+							</li>
+
+							<li>
+								<b>Class 5: 22.5%</b> <br>
+								 5     5     3     2     1     4     5     5     2     5     4     1     4     1     4     2     5     4     4     3     2     1     3     2     4     3     1     5     2     3     2     3     3     1     2     5     4     2     5     1
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+
+
+
+		</ol>
+	</div>
+</section>
+</body>
+</html>
